@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RecipehubApplication<recipehub>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ahmed.recipehub.RecipehubApplication",
+            "projectName": "recipehub",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
