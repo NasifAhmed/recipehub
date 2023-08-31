@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RecipeHub :: Home</title>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Recipe Hub</h1>
-        <hr>
-        <div class="recipe-container">
-            <div class="recipe" th:each="recipe : ${recipes}">
-                <h2><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.title}">Title</a></h2>
-                <p th:text="${recipe.body}">Body Text</p>
-                <br>
+    <header>
+        <nav class="flex justify-around items-center bg-orange-300 pt-8 pb-8">
+            <h1 class="text-3xl font-black"><a th:href="@{/}">Recipe Hub</a></h1>
+            <ul sec:authorize="!isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
+                <li><a th:href="@{/login}">Log In</a> </li>
+                <li><a th:href="@{/register}">Register</a></li>
+            </ul>
+            <div sec:authorize="isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
+                <form th:action="@{/logout}" method="POST"
+                    class="flex justify-between items-center gap-10 text-xl font-bold">
+                    <div>
+                        <label>Hi, <span sec:authentication="name">Username</span></label>
+                    </div>
+                    <button type="submit">Logout</button>
+                </form>
+                <a th:href="@{/recipe/new}">
+                    <button>Post New Recipe</button>
+                </a>
             </div>
+        </nav>
+    </header>
+    <main class="recipe-container flex flex-col items-center mt-20 gap-10">
+        <div class="recipe w-96 bg-orange-100 text-center" th:each="recipe : ${recipes}">
+            <h2 class="text-xl font-bold"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.title}">Title</a></h2>
+            <h5 th:text="'Written By : '+ ${recipe.account.name}">Account Name</h5>
+            <p th:text="${recipe.body}" hidden>Body Text</p>
+            <br>
         </div>
-    </div>
+    </main>
 </body>
+
 </html>

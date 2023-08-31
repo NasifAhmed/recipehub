@@ -27,4 +27,8 @@ public class RecipeService {
     public Recipe save(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
+
+    public void delete(Recipe recipe) {
+        recipeRepository.delete(recipe);
+    }
 }

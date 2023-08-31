@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>RecipeHub :: Recipe</title>
+    <title>RecipeHub :: Login</title>
 </head>
 
 <body>
 
+
     <header>
         <nav class="flex justify-around items-center bg-orange-300 pt-8 pb-8">
-            <h1 class="text-3xl font-black"><a th:href="@{/}">Recipe Hub</a></h1>
+            <h1 class="text-3xl font-black"><a th:href="@{/}">Home</a></h1>
             <ul sec:authorize="!isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
-                <li><a th:href="@{/login}">Log In</a> </li>
                 <li><a th:href="@{/register}">Register</a></li>
             </ul>
             <div sec:authorize="isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
@@ -32,14 +32,22 @@
         </nav>
     </header>
 
-    <main class="container m-20 flex flex-col justify-center items-start">
-
-        <div class="recipe w-full">
-            <h2 class="bg-orange-200 text-2xl font-bold pt-5 px-8 py-8" th:text="${recipe.title}">Title</h2>
-            <h5 class="bg-orange-200 text-lg font-medium pb-5 px-8 py-8" th:text="'Written By : '+ ${recipe.account.name}">Account Name</h5>
-            <p class="bg-orange-100 text-base font-normal pt-10 pb-10 px-8 py-8" th:text="${recipe.body}">Body Text</p>
+    <main class="w-full flex justify-center items-center mt-20">
+        <div class="container bg-orange-200 pt-10 pb-10" >
+            <form action="#" th:action="@{/login}" method="POST" class="flex flex-col text-center justify-around items-center gap-6">
+    
+                    <label for="email" class="text-lg font-semibold">Email</label>
+                    <input id="email" type="text" name="email" class="w-80 h-10 bg-orange-100 px-8 py-8" placeholder="Email" />
+    
+                    <label for="password" class="text-lg font-semibold">Password</label>
+                    <input id="password" type="password" name="password" class="w-80 h-10 bg-orange-100 px-8 py-8" placeholder="Password" />
+    
+                <button type="submit" class="bg-orange-400 p-3 text-white font-extrabold">Log In</button>
+            </form>
         </div>
     </main>
+
+    
 </body>
 
 </html>

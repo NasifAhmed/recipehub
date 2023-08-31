@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>RecipeHub :: Recipe</title>
+    <title>RecipeHub :: Edit</title>
 </head>
 
 <body>
@@ -32,13 +32,20 @@
         </nav>
     </header>
 
-    <main class="container m-20 flex flex-col justify-center items-start">
 
-        <div class="recipe w-full">
-            <h2 class="bg-orange-200 text-2xl font-bold pt-5 px-8 py-8" th:text="${recipe.title}">Title</h2>
-            <h5 class="bg-orange-200 text-lg font-medium pb-5 px-8 py-8" th:text="'Written By : '+ ${recipe.account.name}">Account Name</h5>
-            <p class="bg-orange-100 text-base font-normal pt-10 pb-10 px-8 py-8" th:text="${recipe.body}">Body Text</p>
-        </div>
+    <main class="container m-20 flex flex-col justify-center items-start">
+        <form action="#" class="flex flex-col justify-around items-start gap-6 w-full"
+            th:action="@{'/recipe/{id}'(id=${recipe.id})}" th:object="${recipe}" method="POST">
+            <input type="hidden" th:field="*{account}">
+            <h2 class="text-xl font-extrabold">Edit Recipe Here</h2>
+
+            <label for="new-recipe-title" class="text-lg font-semibold bg-orange-200 mt-5">Update Recipe Title</label>
+            <input id="new-recipe-title" class="w-96 h-10 bg-orange-100 text-lg font-bold p-8" type="text" th:field="*{title}" placeholder="Title">
+            <label for="new-recipe-body" class="text-lg font-semibold bg-orange-200 mt-5">Update Recipe Body</label>
+            <textarea id="new-recipe-body" class="w-full h-full bg-orange-100 p-8" th:field="*{body}"></textarea>
+
+            <button type="submit" class="bg-orange-400 p-3 text-white font-extrabold">Update Recipe</button>
+        </form>
     </main>
 </body>
 

@@ -33,10 +33,18 @@
     </header>
 
     <main class="container m-20 flex flex-col justify-center items-start">
-
+        <ul class="flex justify-start gap-6 mb-10" sec:authorize="isAuthenticated()">
+            <li th:if="${userCheck or isAdmin}"><a th:href="@{'/recipe/' + ${recipe.id} + '/edit'}">
+                <button class="bg-orange-400 p-3 text-white font-extrabold">Edit</button>
+            </a></li>
+            <li th:if="${isAdmin}" ><a th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">
+                <button class="bg-orange-400 p-3 text-white font-extrabold">Delete</button>
+            </a></li>
+        </ul>
         <div class="recipe w-full">
             <h2 class="bg-orange-200 text-2xl font-bold pt-5 px-8 py-8" th:text="${recipe.title}">Title</h2>
-            <h5 class="bg-orange-200 text-lg font-medium pb-5 px-8 py-8" th:text="'Written By : '+ ${recipe.account.name}">Account Name</h5>
+            <h5 class="bg-orange-200 text-lg font-medium pb-5 px-8 py-8"
+                th:text="'Written By : '+ ${recipe.account.name}">Account Name</h5>
             <p class="bg-orange-100 text-base font-normal pt-10 pb-10 px-8 py-8" th:text="${recipe.body}">Body Text</p>
         </div>
     </main>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RecipeHub :: Register</title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="flex justify-around items-center bg-orange-300 pt-8 pb-8">
+            <h1 class="text-3xl font-black"><a th:href="@{/}">Home</a></h1>
+            <ul sec:authorize="!isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
+                <li><a th:href="@{/login}">Log In</a></li>
+            </ul>
+            <div sec:authorize="isAuthenticated()" class="flex justify-between items-center gap-10 text-xl font-bold">
+                <form th:action="@{/logout}" method="POST"
+                    class="flex justify-between items-center gap-10 text-xl font-bold">
+                    <div>
+                        <label>Hi, <span sec:authentication="name">Username</span></label>
+                    </div>
+                    <button type="submit">Logout</button>
+                </form>
+                <a th:href="@{/recipe/new}">
+                    <button>Post New Recipe</button>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="w-full flex justify-center items-center mt-20">
+        <div class="container bg-orange-200 pt-10 pb-10">
+            <form action="#" th:action="@{/register}" th:object="${account}" method="POST"
+                class="flex flex-col text-center justify-around items-center gap-6">
+                <label for="name" class="text-lg font-semibold">Name</label>
+                <input id="name" class="w-80 h-10 bg-orange-100 px-8 py-8" type="text" th:field="*{name}" placeholder="Name" />
+
+                <label for="email" class="text-lg font-semibold">Email</label>
+                <input id="email" class="w-80 h-10 bg-orange-100 px-8 py-8" type="text" th:field="*{email}" placeholder="Email" />
+
+                <label for="password" class="text-lg font-semibold">Password</label>
+                <input id="password" class="w-80 h-10 bg-orange-100 px-8 py-8" type="password" th:field="*{password}" placeholder="Password" />
+
+                <button type="submit" class="bg-orange-400 p-3 text-white font-extrabold">Register</button>
+            </form>
+        </div>
+    </main>
+
+
+</body>
+
+</html>
